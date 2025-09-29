@@ -2,12 +2,11 @@
 
 A simple HTML/CSS project about red pandas with a complete CI/CD pipeline using GitHub Actions.
 
-##  Lab Objectives
+## 🎯 Lab Objectives
 
 This project fulfills **Lab 5 CD (Continuous Deployment)** requirements by:
 
 - Building upon **Lab 4 CI** with multi-stage workflows, matrix builds, and caching
-- Implementing **continuous deployment** to GitHub Pages
 - Researching and using free deployment platforms
 
 ## Features
@@ -15,16 +14,15 @@ This project fulfills **Lab 5 CD (Continuous Deployment)** requirements by:
 - **Responsive Design**: Beautiful, mobile-friendly layout
 - **Complete CI/CD Pipeline**: Automated testing, linting, building, and deployment
 
-##  Technologies Used
+## 🛠️ Technologies Used
 
-- **Frontend**: HTML5, CSS3, 🛠️ Technologies Used
-Vanilla JavaScript
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript
 - **CI/CD**: GitHub Actions
-- **Deployment**: GitHub Pages
+- **Deployment**: Netlify
 - **Testing**: Node.js, Custom test suite
 - **Linting**: ESLint, Stylelint, HTMLHint
 
-##  Project Structure
+## 📦 Project Structure
 
 ```
 red-panda-paradise/
@@ -111,7 +109,6 @@ The project includes a comprehensive test suite that validates:
 
 Run tests with: `npm test`
 
-##  Lab Requirements Fulfilled
 
 ### Lab 4 CI Requirements ✅
 
@@ -129,7 +126,4 @@ Run tests with: `npm test`
 - [x] Automatic deployment on successful CI
 - [x] Free tier deployment platform (Netlify)
 - [x] Production-ready build process
-
-
-
 
