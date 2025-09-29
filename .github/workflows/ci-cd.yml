@@ -1,6 +1,5 @@
 name: Red Panda Paradise CI/CD
 
-# Trigger on pushes and PRs to main branch (Lab 4 requirement)
 on:
   push:
     branches: [main]
@@ -8,12 +7,12 @@ on:
     branches: [main]
 
 jobs:
-  # CI Job: Lint, Test, and Build (Lab 4 requirements)
+  # CI Job: Lint, Test, and Build
   ci:
     name: Continuous Integration
     runs-on: ${{ matrix.os }}
 
-    # Matrix strategy for multiple environments (Lab 4 requirement)
+    # Matrix strategy for multiple environments
     strategy:
       matrix:
         node-version: [16, 18]
@@ -28,7 +27,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Dependency caching (Lab 4 requirement)
+      # Dependency caching
       - name: Cache node modules
         uses: actions/cache@v3
         with:
@@ -41,28 +40,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Lint stage (Lab 4 requirement)
+      # Lint stage
       - name: Run linting
         run: npm run lint
 
-      # Test stage (Lab 4 requirement)
+      # Test stage
       - name: Run tests
         run: npm test
 
-      # Build stage (Lab 4 requirement)
+      # Build stage
       - name: Build project
         run: npm run build
 
-      # Upload build artifacts (Lab 4 requirement)
+      # Upload build artifacts
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
         with:
           name: red-panda-paradise-dist
           path: dist/
           retention-days: 7
 
-  # CD Job: Deploy to Netlify (Lab 5 requirement)
+  # CD Job: Deploy to Netlify
   deploy:
     name: Continuous Deployment
     needs: ci # Only deploy if CI passes
