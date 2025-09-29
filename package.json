@@ -1,0 +1,28 @@
+{
+  "name": "red-panda-paradise",
+  "version": "1.0.0",
+  "description": "A cute HTML/CSS project about red pandas with CI/CD pipeline",
+  "main": "index.html",
+  "scripts": {
+    "build": "npm run copy-files",
+    "copy-files": "node -e \"const fs=require('fs'); if(!fs.existsSync('dist')) fs.mkdirSync('dist'); ['index.html','style.css','script.js'].forEach(f=>fs.copyFileSync(f,'dist/'+f))\"",
+    "lint": "npx htmlhint index.html && npx stylelint style.css && npx eslint script.js",
+    "test": "node test.js",
+    "start": "npx http-server . -p 3000",
+    "dev": "npx http-server . -p 3000 -o"
+  },
+  "keywords": ["red-pandas", "html", "css", "static-site", "ci-cd"],
+  "author": "DevOps Student",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "htmlhint": "^1.1.4",
+    "stylelint": "^15.10.0",
+    "stylelint-config-standard": "^34.0.0",
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR-USERNAME/red-panda-paradise.git"
+  }
+}

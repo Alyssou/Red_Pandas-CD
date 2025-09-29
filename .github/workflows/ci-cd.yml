@@ -1,0 +1,108 @@
+name: Red Panda Paradise CI/CD
+
+# Trigger on pushes and PRs to main branch (Lab 4 requirement)
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # CI Job: Lint, Test, and Build (Lab 4 requirements)
+  ci:
+    name: Continuous Integration
+    runs-on: ${{ matrix.os }}
+
+    # Matrix strategy for multiple environments (Lab 4 requirement)
+    strategy:
+      matrix:
+        node-version: [16, 18]
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Dependency caching (Lab 4 requirement)
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node-version }}-
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Lint stage (Lab 4 requirement)
+      - name: Run linting
+        run: npm run lint
+
+      # Test stage (Lab 4 requirement)
+      - name: Run tests
+        run: npm test
+
+      # Build stage (Lab 4 requirement)
+      - name: Build project
+        run: npm run build
+
+      # Upload build artifacts (Lab 4 requirement)
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '18'
+        with:
+          name: red-panda-paradise-dist
+          path: dist/
+          retention-days: 7
+
+  # CD Job: Deploy to Netlify (Lab 5 requirement)
+  deploy:
+    name: Continuous Deployment
+    needs: ci # Only deploy if CI passes
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-18-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-18-
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for production
+        run: npm run build
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: "./dist"
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

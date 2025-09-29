@@ -1,0 +1,13 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "font-family-name-quotes": null,
+    "color-function-notation": null,
+    "alpha-value-notation": null,
+    "length-zero-no-unit": null,
+    "media-feature-range-notation": null,
+    "selector-pseudo-element-colon-notation": "double",
+    "selector-pseudo-class-parentheses-space-inside": "never",
+    "function-url-quotes": "always"
+  }
+}
