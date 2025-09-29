@@ -7,22 +7,18 @@ A cute and simple HTML/CSS project about red pandas with a complete CI/CD pipeli
 This project fulfills **Lab 5 CD (Continuous Deployment)** requirements by:
 
 - Building upon **Lab 4 CI** with multi-stage workflows, matrix builds, and caching
-- Implementing **continuous deployment** to GitHub Pages
 - Researching and using free deployment platforms
 
 ## 🚀 Features
 
 - **Responsive Design**: Beautiful, mobile-friendly layout
-- **Cute Red Panda Content**: Information, facts, and gallery
-- **Modern CSS**: Gradients, animations, and smooth scrolling
-- **Interactive JavaScript**: Smooth navigation and scroll effects
 - **Complete CI/CD Pipeline**: Automated testing, linting, building, and deployment
 
 ## 🛠️ Technologies Used
 
 - **Frontend**: HTML5, CSS3, Vanilla JavaScript
 - **CI/CD**: GitHub Actions
-- **Deployment**: GitHub Pages
+- **Deployment**: Netlify
 - **Testing**: Node.js, Custom test suite
 - **Linting**: ESLint, Stylelint, HTMLHint
 
@@ -115,7 +111,7 @@ Run tests with: `npm test`
 
 ## 📋 Lab Requirements Fulfilled
 
-### Lab 4 CI Requirements ✅
+### Lab 4 CI Requirements 
 
 - [x] Multi-stage workflow (lint, test, build)
 - [x] Matrix strategy (Node.js 16/18, Ubuntu/Windows)
@@ -124,7 +120,7 @@ Run tests with: `npm test`
 - [x] Build artifact upload
 - [x] Triggers on push/PR to main branch
 
-### Lab 5 CD Requirements ✅
+### Lab 5 CD Requirements 
 
 - [x] Research deployment platforms (GitHub Pages, Netlify, Vercel)
 - [x] Extended Lab 4 workflow with deployment job
@@ -132,54 +128,12 @@ Run tests with: `npm test`
 - [x] Free tier deployment platform (Netlify)
 - [x] Production-ready build process
 
-## 🌐 Deployment Platforms Research
 
-### Free Static Site Hosting Options:
-
-1. **GitHub Pages** ⭐ (Used in this project)
-
-   - Free for public repos
-   - Integrates directly with GitHub Actions
-   - Custom domain support
-   - Global CDN
-
-2. **Netlify**
-
-   - 100GB bandwidth/month free
-   - Form handling
-   - Edge functions
-   - Branch previews
-
-3. **Vercel**
-
-   - Great for modern frameworks
-   - Fast global CDN
-   - Serverless functions
-   - Analytics
-
-4. **Firebase Hosting**
-   - Google's platform
-   - Global CDN
-   - SSL certificates
-   - Integration with Firebase services
-
-## 🚀 Deployment Setup (Netlify)
+##  Deployment Setup (Netlify)
 
 To set up automatic deployment to Netlify:
 
-### 1. Create a Netlify Account
 
-- Go to [netlify.com](https://netlify.com) and sign up for free
-- Connect your GitHub account
-
-### 2. Create a New Site
-
-- In Netlify dashboard, click "New site from Git"
-- Choose GitHub and select your repository
-- Set build command: `npm run build`
-- Set publish directory: `dist`
-
-### 3. Get API Credentials
 
 - Go to User Settings → Applications → Personal access tokens
 - Generate a new access token and copy it
